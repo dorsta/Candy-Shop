@@ -1,0 +1,28 @@
+﻿@model Candy
+
+<div class="col-sm-4 col-lg-4 col-md-4">
+    <div class="thumbnail">
+        <img src="@Model.ImageThumbnailUrl" alt="@Model.Name" />
+        <div class="caption">
+            <h3 class="pull-right">@Model.Price.ToString("c", CultureInfo.CreateSpecificCulture("lt-LT"))</h3>
+            <a
+               asp-controller="Candy"
+               asp-action="Details"
+               asp-route-id="@Model.CandyId"
+            >
+                <h3>@Model.Name</h3>
+            </a>
+            <p>@Model.Description</p>
+        </div>
+        <div class="addToCart">
+            <p class="button">
+                <a class="btn btn-primary"
+                   asp-controller="ShoppingCart"
+                   asp-action="AddToShoppingCart"
+                   asp-route-candyId="@Model.CandyId">
+                    Add To Cart
+                </a>
+            </p>
+        </div>
+    </div>
+</div>

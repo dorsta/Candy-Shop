@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\Mipsas\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\Mipsas\\.nuget\\packages"
+    ]
+  }
+}

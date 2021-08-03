@@ -1,0 +1,57 @@
+﻿@model ShoppingCartViewModel
+
+<h2>Shopping Cart: All your candy you love</h2>
+<table class="talbe table-bordered talbe-striped">
+    <thead>
+        <tr>
+            <th>Selected Amount</th>
+            <th>Candy</th>
+            <th class="text-right">Price</th>
+            <th class="text-right">Subtotal</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ShoppingCart.ShoppingCartItems)
+        {
+            <tr>
+                <td class="text-center">
+                    <a class="btn btn-primary"
+                       asp-controller="ShoppingCart"
+                       asp-action="RemoveFromShoppingCart"
+                       asp-route-candyId="@item.Candy.CandyId">
+                        -
+                    </a>
+                    @item.Amount
+                    <a class="btn btn-primary"
+                       asp-controller="ShoppingCart"
+                       asp-action="AddToShoppingCart"
+                       asp-route-candyId="@item.Candy.CandyId">
+                        +
+                    </a>
+                </td>
+                <td class="text-left">@item.Candy.Name</td>
+                <td class="text-right">
+                    @item.Candy.Price.ToString("c", CultureInfo.CreateSpecificCulture("lt-LT"))
+                </td>
+                <td class="text-right">
+                    @((item.Candy.Price * item.Amount)
+                            .ToString("c", CultureInfo.CreateSpecificCulture("lt-LT")))
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3" class="text-right">Total:</td>
+            <td class="text-right">
+                @(Model.ShoppingCart.GetShoppingCartTotal()
+                        .ToString("c", CultureInfo.CreateSpecificCulture("lt-LT")))
+            </td>
+        </tr>
+    </tfoot>
+</table>
+
+<div class="text-center">
+    <a class="btn btn-primary" asp-controller="ShoppingCart" asp-action="ClearCart">Clear Cart</a>
+    <a class="btn btn-primary" asp-controller="Order" asp-action="Checkout">Checkout</a>
+</div>
